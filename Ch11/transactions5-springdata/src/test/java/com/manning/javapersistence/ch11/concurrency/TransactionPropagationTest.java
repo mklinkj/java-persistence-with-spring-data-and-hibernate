@@ -128,7 +128,7 @@ public class TransactionPropagationTest {
         itemRepository.addItemNoRollback("Item2", LocalDate.of(2022, 3, 1));
         itemRepository.addItemNoRollback("Item3", LocalDate.of(2022, 1, 1));
 
-        DuplicateItemNameException ex = assertThrows(DuplicateItemNameException.class, () -> itemRepository.addItem("Item2", LocalDate.of(2016, 3, 1)));
+        DuplicateItemNameException ex = assertThrows(DuplicateItemNameException.class, () -> itemRepository.addItemNoRollback("Item2", LocalDate.of(2016, 3, 1)));
         assertAll(
                 () -> assertEquals("Item with name Item2 already exists", ex.getMessage()),
                 () -> assertEquals(4, logRepository.findAll().size()),
